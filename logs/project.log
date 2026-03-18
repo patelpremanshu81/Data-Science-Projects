@@ -1,0 +1,444 @@
+[2026-03-18 09:27:05] INFO -  Laptop Price Prediction package initialized
+[2026-03-18 09:27:38] INFO - ======== Pipeline started ========
+[2026-03-18 09:27:38] INFO - Step 1: Data ingestion
+[2026-03-18 09:27:39] INFO - Attempting to read from MySQL
+[2026-03-18 09:27:40] WARNING - MySQL read failed: (pymysql.err.OperationalError) (1045, "Access denied for user 'root'@'localhost' (using password: NO)")
+(Background on this error at: https://sqlalche.me/e/20/e3q8). Falling back to CSV.
+[2026-03-18 09:27:40] ERROR - Pipeline failed
+Traceback (most recent call last):
+  File "C:\Users\Lenovo\OneDrive\Desktop\projects\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 143, in __init__
+    self._dbapi_connection = engine.raw_connection()
+                             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\OneDrive\Desktop\projects\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 3317, in raw_connection
+    return self.pool.connect()
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\OneDrive\Desktop\projects\venv\Lib\site-packages\sqlalchemy\pool\base.py", line 448, in connect
+    return _ConnectionFairy._checkout(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\OneDrive\Desktop\projects\venv\Lib\site-packages\sqlalchemy\pool\base.py", line 1272, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\OneDrive\Desktop\projects\venv\Lib\site-packages\sqlalchemy\pool\base.py", line 712, in checkout
+    rec = pool._do_get()
+          ^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\OneDrive\Desktop\projects\venv\Lib\site-packages\sqlalchemy\pool\impl.py", line 177, in _do_get
+    with util.safe_reraise():
+  File "C:\Users\Lenovo\OneDrive\Desktop\projects\venv\Lib\site-packages\sqlalchemy\util\langhelpers.py", line 121, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\Lenovo\OneDrive\Desktop\projects\venv\Lib\site-packages\sqlalchemy\pool\impl.py", line 175, in _do_get
+    return self._create_connection()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\OneDrive\Desktop\projects\venv\Lib\site-packages\sqlalchemy\pool\base.py", line 389, in _create_connection
+    return _ConnectionRecord(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\OneDrive\Desktop\projects\venv\Lib\site-packages\sqlalchemy\pool\base.py", line 674, in __init__
+    self.__connect()
+  File "C:\Users\Lenovo\OneDrive\Desktop\projects\venv\Lib\site-packages\sqlalchemy\pool\base.py", line 900, in __connect
+    with util.safe_reraise():
+  File "C:\Users\Lenovo\OneDrive\Desktop\projects\venv\Lib\site-packages\sqlalchemy\util\langhelpers.py", line 121, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\Lenovo\OneDrive\Desktop\projects\venv\Lib\site-packages\sqlalchemy\pool\base.py", line 896, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\OneDrive\Desktop\projects\venv\Lib\site-packages\sqlalchemy\engine\create.py", line 667, in connect
+    return dialect.connect(*cargs_tup, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\OneDrive\Desktop\projects\venv\Lib\site-packages\sqlalchemy\engine\default.py", line 630, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)  # type: ignore[no-any-return]  # NOQA: E501
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\OneDrive\Desktop\projects\venv\Lib\site-packages\pymysql\connections.py", line 365, in __init__
+    self.connect()
+  File "C:\Users\Lenovo\OneDrive\Desktop\projects\venv\Lib\site-packages\pymysql\connections.py", line 681, in connect
+    self._request_authentication()
+  File "C:\Users\Lenovo\OneDrive\Desktop\projects\venv\Lib\site-packages\pymysql\connections.py", line 958, in _request_authentication
+    auth_packet = self._read_packet()
+                  ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\OneDrive\Desktop\projects\venv\Lib\site-packages\pymysql\connections.py", line 782, in _read_packet
+    packet.raise_for_error()
+  File "C:\Users\Lenovo\OneDrive\Desktop\projects\venv\Lib\site-packages\pymysql\protocol.py", line 219, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "C:\Users\Lenovo\OneDrive\Desktop\projects\venv\Lib\site-packages\pymysql\err.py", line 150, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.OperationalError: (1045, "Access denied for user 'root'@'localhost' (using password: NO)")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Lenovo\OneDrive\Desktop\projects\src\components\data_ingestion.py", line 28, in ingest_data
+    df = pd.read_sql_table(table, con=engine)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\OneDrive\Desktop\projects\venv\Lib\site-packages\pandas\io\sql.py", line 354, in read_sql_table
+    with pandasSQL_builder(con, schema=schema, need_transaction=True) as pandas_sql:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\OneDrive\Desktop\projects\venv\Lib\site-packages\pandas\io\sql.py", line 908, in pandasSQL_builder
+    return SQLDatabase(con, schema, need_transaction)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\OneDrive\Desktop\projects\venv\Lib\site-packages\pandas\io\sql.py", line 1649, in __init__
+    con = self.exit_stack.enter_context(con.connect())
+                                        ^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\OneDrive\Desktop\projects\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 3293, in connect
+    return self._connection_cls(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\OneDrive\Desktop\projects\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 145, in __init__
+    Connection._handle_dbapi_exception_noconnection(
+  File "C:\Users\Lenovo\OneDrive\Desktop\projects\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 2448, in _handle_dbapi_exception_noconnection
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Users\Lenovo\OneDrive\Desktop\projects\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 143, in __init__
+    self._dbapi_connection = engine.raw_connection()
+                             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\OneDrive\Desktop\projects\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 3317, in raw_connection
+    return self.pool.connect()
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\OneDrive\Desktop\projects\venv\Lib\site-packages\sqlalchemy\pool\base.py", line 448, in connect
+    return _ConnectionFairy._checkout(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\OneDrive\Desktop\projects\venv\Lib\site-packages\sqlalchemy\pool\base.py", line 1272, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\OneDrive\Desktop\projects\venv\Lib\site-packages\sqlalchemy\pool\base.py", line 712, in checkout
+    rec = pool._do_get()
+          ^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\OneDrive\Desktop\projects\venv\Lib\site-packages\sqlalchemy\pool\impl.py", line 177, in _do_get
+    with util.safe_reraise():
+  File "C:\Users\Lenovo\OneDrive\Desktop\projects\venv\Lib\site-packages\sqlalchemy\util\langhelpers.py", line 121, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\Lenovo\OneDrive\Desktop\projects\venv\Lib\site-packages\sqlalchemy\pool\impl.py", line 175, in _do_get
+    return self._create_connection()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\OneDrive\Desktop\projects\venv\Lib\site-packages\sqlalchemy\pool\base.py", line 389, in _create_connection
+    return _ConnectionRecord(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\OneDrive\Desktop\projects\venv\Lib\site-packages\sqlalchemy\pool\base.py", line 674, in __init__
+    self.__connect()
+  File "C:\Users\Lenovo\OneDrive\Desktop\projects\venv\Lib\site-packages\sqlalchemy\pool\base.py", line 900, in __connect
+    with util.safe_reraise():
+  File "C:\Users\Lenovo\OneDrive\Desktop\projects\venv\Lib\site-packages\sqlalchemy\util\langhelpers.py", line 121, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\Lenovo\OneDrive\Desktop\projects\venv\Lib\site-packages\sqlalchemy\pool\base.py", line 896, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\OneDrive\Desktop\projects\venv\Lib\site-packages\sqlalchemy\engine\create.py", line 667, in connect
+    return dialect.connect(*cargs_tup, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\OneDrive\Desktop\projects\venv\Lib\site-packages\sqlalchemy\engine\default.py", line 630, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)  # type: ignore[no-any-return]  # NOQA: E501
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\OneDrive\Desktop\projects\venv\Lib\site-packages\pymysql\connections.py", line 365, in __init__
+    self.connect()
+  File "C:\Users\Lenovo\OneDrive\Desktop\projects\venv\Lib\site-packages\pymysql\connections.py", line 681, in connect
+    self._request_authentication()
+  File "C:\Users\Lenovo\OneDrive\Desktop\projects\venv\Lib\site-packages\pymysql\connections.py", line 958, in _request_authentication
+    auth_packet = self._read_packet()
+                  ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\OneDrive\Desktop\projects\venv\Lib\site-packages\pymysql\connections.py", line 782, in _read_packet
+    packet.raise_for_error()
+  File "C:\Users\Lenovo\OneDrive\Desktop\projects\venv\Lib\site-packages\pymysql\protocol.py", line 219, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "C:\Users\Lenovo\OneDrive\Desktop\projects\venv\Lib\site-packages\pymysql\err.py", line 150, in raise_mysql_exception
+    raise errorclass(errno, errval)
+sqlalchemy.exc.OperationalError: (pymysql.err.OperationalError) (1045, "Access denied for user 'root'@'localhost' (using password: NO)")
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Lenovo\OneDrive\Desktop\projects\src\components\data_ingestion.py", line 32, in ingest_data
+    df = pd.read_csv('/mnt/data/laptop_data.csv')
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\OneDrive\Desktop\projects\venv\Lib\site-packages\pandas\io\parsers\readers.py", line 873, in read_csv
+    return _read(filepath_or_buffer, kwds)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\OneDrive\Desktop\projects\venv\Lib\site-packages\pandas\io\parsers\readers.py", line 300, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\OneDrive\Desktop\projects\venv\Lib\site-packages\pandas\io\parsers\readers.py", line 1645, in __init__
+    self._engine = self._make_engine(f, self.engine)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\OneDrive\Desktop\projects\venv\Lib\site-packages\pandas\io\parsers\readers.py", line 1904, in _make_engine
+    self.handles = get_handle(
+                   ^^^^^^^^^^^
+  File "C:\Users\Lenovo\OneDrive\Desktop\projects\venv\Lib\site-packages\pandas\io\common.py", line 926, in get_handle
+    handle = open(
+             ^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/mnt/data/laptop_data.csv'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Lenovo\OneDrive\Desktop\projects\src\pipeline\training_pipeline.py", line 43, in run_pipeline
+    ingestion_artifact: DataIngestionArtifact = ingest_data()
+                                                ^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\OneDrive\Desktop\projects\src\components\data_ingestion.py", line 39, in ingest_data
+    raise PricePredictorException(f"Data ingestion failed: {e}")
+src.exception.PricePredictorException: Data ingestion failed: [Errno 2] No such file or directory: '/mnt/data/laptop_data.csv'
+[2026-03-18 09:48:54] INFO -  Laptop Price Prediction package initialized
+[2026-03-18 09:49:41] INFO -  Laptop Price Prediction package initialized
+[2026-03-18 10:01:39] INFO -  Laptop Price Prediction package initialized
+[2026-03-18 10:01:55] INFO - ======== Pipeline started ========
+[2026-03-18 10:01:55] INFO - Step 1: Data ingestion
+[2026-03-18 10:01:56] INFO - Attempting to read from MySQL
+[2026-03-18 10:01:56] WARNING - MySQL read failed: (pymysql.err.OperationalError) (1045, "Access denied for user 'root'@'localhost' (using password: NO)")
+(Background on this error at: https://sqlalche.me/e/20/e3q8). Falling back to CSV.
+[2026-03-18 10:01:56] INFO - Raw data saved at: artifacts\raw\laptop_raw.csv
+[2026-03-18 10:01:56] INFO - Step 2: Data validation (basic checks)
+[2026-03-18 10:01:56] INFO - Missing value ratios (top 10):
+{'Secondary_Storage': 0.8116, 'SKU': 0.0, 'Model': 0.0, 'Brand': 0.0, 'CPU': 0.0, 'RAM': 0.0, 'Primary_Storage': 0.0, 'GPU': 0.0, 'Screen_Size': 0.0, 'Resolution': 0.0}
+[2026-03-18 10:01:56] WARNING - Columns with > 30% missing: {'Secondary_Storage': 0.8116}
+[2026-03-18 10:01:56] INFO - Dropped high-NA columns and continuing: ['Secondary_Storage']
+[2026-03-18 10:01:56] INFO - Data validation passed (validate() ok).
+[2026-03-18 10:01:56] INFO - Saved possibly-updated raw dataframe to artifacts\raw\laptop_raw.csv
+[2026-03-18 10:01:56] INFO - Step 3: Data transformation
+[2026-03-18 10:01:56] INFO - Dropped identifier column: SKU
+[2026-03-18 10:01:56] INFO - Dropped identifier column: Model
+[2026-03-18 10:01:56] INFO - Numeric cols: ['Screen_Size', 'Weight_kg', 'Battery_Hours']
+[2026-03-18 10:01:56] INFO - Categorical cols: ['Brand', 'CPU', 'RAM', 'Primary_Storage', 'GPU', 'Resolution', 'OS', 'Type', 'Touchscreen']
+[2026-03-18 10:01:56] INFO - Fitting preprocessor on training features...
+[2026-03-18 10:01:57] INFO - Saved preprocessor to: artifacts\transformed\preprocessor.joblib
+[2026-03-18 10:01:57] INFO - Saved artifacts/transformed/train.csv and test.csv
+[2026-03-18 10:01:57] INFO - Saved artifacts/transformed/feature_list.json
+[2026-03-18 10:01:57] INFO - Transformer saved at: artifacts\transformed\preprocessor.joblib
+[2026-03-18 10:01:57] INFO - Step 4: Model training
+[2026-03-18 10:01:57] INFO - Loading transformed train/test CSVs
+[2026-03-18 10:01:57] INFO - Loading preprocessor from: artifacts\transformed\preprocessor.joblib
+[2026-03-18 10:01:57] INFO - Transforming features using preprocessor
+[2026-03-18 10:01:57] INFO - Training LinearRegression (baseline)
+[2026-03-18 10:01:57] INFO - LinearRegression evaluation -> RMSE: 8243.5040, MAE: 5749.0160, R2: 0.9650
+[2026-03-18 10:01:57] INFO - Training RandomForestRegressor
+[2026-03-18 10:02:04] INFO - RandomForest evaluation -> RMSE: 9166.6615, MAE: 6746.8086, R2: 0.9568
+[2026-03-18 10:02:04] INFO - Selected best model: LinearRegression with RMSE = 8243.5040
+[2026-03-18 10:02:04] INFO - Saved best model to: artifacts\model\best_model.joblib
+[2026-03-18 10:02:04] INFO - ModelTrainerArtifact created -> train_score: 0.9656, test_score: 0.9650
+[2026-03-18 10:02:04] INFO - Model saved at: artifacts\model\best_model.joblib
+[2026-03-18 10:02:04] INFO - Train score (R2): 0.9656  Test score (R2): 0.9650
+[2026-03-18 10:02:04] INFO - Step 5: Model evaluation
+[2026-03-18 10:02:04] INFO - Starting model evaluation...
+[2026-03-18 10:02:04] INFO - Loaded model from artifacts\model\best_model.joblib and preprocessor from artifacts\transformed\preprocessor.joblib
+[2026-03-18 10:02:04] INFO - Model Evaluation Completed \u2192 RMSE: 8243.5040, MAE: 5749.0160, R2: 0.9650
+[2026-03-18 10:02:04] INFO - Metrics saved to artifacts\model\model_metrics.json
+[2026-03-18 10:02:04] INFO - Evaluation metrics: {'RMSE': 8243.503973813784, 'MAE': 5749.0160413520925, 'R2': 0.9650240530089602}
+[2026-03-18 10:02:04] INFO - Step 6: Model pushing
+[2026-03-18 10:02:04] INFO - Pushed model version to: prediction\models\models\best_model_20260318_100204.joblib
+[2026-03-18 10:02:04] INFO - Copied new model to active path: prediction\models\models\current_model.joblib
+[2026-03-18 10:02:04] INFO - Model push info: {'versioned_path': 'prediction\\models\\models\\best_model_20260318_100204.joblib', 'active_path': 'prediction\\models\\models\\current_model.joblib'}
+[2026-03-18 10:02:04] INFO - Pipeline summary written to: artifacts\pipeline_summary.json
+[2026-03-18 10:02:04] INFO - ======== Pipeline finished successfully ========
+[2026-03-18 10:15:34] INFO -  Laptop Price Prediction package initialized
+[2026-03-18 10:15:53] INFO - ======== Pipeline started ========
+[2026-03-18 10:15:53] INFO - Step 1: Data ingestion
+[2026-03-18 10:15:53] INFO - Attempting to read from MySQL
+[2026-03-18 10:15:54] WARNING - MySQL read failed: (pymysql.err.OperationalError) (1045, "Access denied for user 'root'@'localhost' (using password: NO)")
+(Background on this error at: https://sqlalche.me/e/20/e3q8). Falling back to CSV.
+[2026-03-18 10:15:54] INFO - Raw data saved at: artifacts\raw\laptop_raw.csv
+[2026-03-18 10:15:54] INFO - Step 2: Data validation (basic checks)
+[2026-03-18 10:15:54] INFO - Missing value ratios (top 10):
+{'Secondary_Storage': 0.8116, 'SKU': 0.0, 'Model': 0.0, 'Brand': 0.0, 'CPU': 0.0, 'RAM': 0.0, 'Primary_Storage': 0.0, 'GPU': 0.0, 'Screen_Size': 0.0, 'Resolution': 0.0}
+[2026-03-18 10:15:54] WARNING - Columns with > 30% missing: {'Secondary_Storage': 0.8116}
+[2026-03-18 10:15:54] INFO - Dropped high-NA columns and continuing: ['Secondary_Storage']
+[2026-03-18 10:15:54] INFO - Data validation passed (validate() ok).
+[2026-03-18 10:15:54] INFO - Saved possibly-updated raw dataframe to artifacts\raw\laptop_raw.csv
+[2026-03-18 10:15:54] INFO - Step 3: Data transformation
+[2026-03-18 10:15:54] INFO - Dropped identifier column: SKU
+[2026-03-18 10:15:54] INFO - Dropped identifier column: Model
+[2026-03-18 10:15:54] INFO - Numeric cols: ['Screen_Size', 'Weight_kg', 'Battery_Hours']
+[2026-03-18 10:15:54] INFO - Categorical cols: ['Brand', 'CPU', 'RAM', 'Primary_Storage', 'GPU', 'Resolution', 'OS', 'Type', 'Touchscreen']
+[2026-03-18 10:15:54] INFO - Fitting preprocessor on training features...
+[2026-03-18 10:15:55] INFO - Saved preprocessor to: artifacts\transformed\preprocessor.joblib
+[2026-03-18 10:15:55] INFO - Saved artifacts/transformed/train.csv and test.csv
+[2026-03-18 10:15:55] INFO - Saved artifacts/transformed/feature_list.json
+[2026-03-18 10:15:55] INFO - Transformer saved at: artifacts\transformed\preprocessor.joblib
+[2026-03-18 10:15:55] INFO - Step 4: Model training
+[2026-03-18 10:15:55] INFO - Loading transformed train/test CSVs
+[2026-03-18 10:15:55] INFO - Loading preprocessor from: artifacts\transformed\preprocessor.joblib
+[2026-03-18 10:15:55] INFO - Transforming features using preprocessor
+[2026-03-18 10:15:55] INFO - Training LinearRegression (baseline)
+[2026-03-18 10:15:55] INFO - LinearRegression evaluation -> RMSE: 8243.5040, MAE: 5749.0160, R2: 0.9650
+[2026-03-18 10:15:55] INFO - Training RandomForestRegressor
+[2026-03-18 10:16:00] INFO - RandomForest evaluation -> RMSE: 9166.6615, MAE: 6746.8086, R2: 0.9568
+[2026-03-18 10:16:00] INFO - Selected best model: LinearRegression with RMSE = 8243.5040
+[2026-03-18 10:16:00] INFO - Saved best model to: artifacts\model\best_model.joblib
+[2026-03-18 10:16:00] INFO - ModelTrainerArtifact created -> train_score: 0.9656, test_score: 0.9650
+[2026-03-18 10:16:00] INFO - Model saved at: artifacts\model\best_model.joblib
+[2026-03-18 10:16:00] INFO - Train score (R2): 0.9656  Test score (R2): 0.9650
+[2026-03-18 10:16:00] INFO - Step 5: Model evaluation
+[2026-03-18 10:16:00] INFO - Starting model evaluation...
+[2026-03-18 10:16:00] INFO - Loaded model from artifacts\model\best_model.joblib and preprocessor from artifacts\transformed\preprocessor.joblib
+[2026-03-18 10:16:00] INFO - Model Evaluation Completed \u2192 RMSE: 8243.5040, MAE: 5749.0160, R2: 0.9650
+[2026-03-18 10:16:00] INFO - Metrics saved to artifacts\model\model_metrics.json
+[2026-03-18 10:16:00] INFO - Evaluation metrics: {'RMSE': 8243.503973813784, 'MAE': 5749.0160413520925, 'R2': 0.9650240530089602}
+[2026-03-18 10:16:00] INFO - Step 6: Model pushing
+[2026-03-18 10:16:00] INFO - Pushed model version to: prediction\models\models\best_model_20260318_101600.joblib
+[2026-03-18 10:16:00] INFO - Archived previous active model to: prediction\models\archive\current_model_20260318_101600.joblib
+[2026-03-18 10:16:00] INFO - Copied new model to active path: prediction\models\models\current_model.joblib
+[2026-03-18 10:16:00] INFO - Model push info: {'versioned_path': 'prediction\\models\\models\\best_model_20260318_101600.joblib', 'archived_previous_active': 'prediction\\models\\archive\\current_model_20260318_101600.joblib', 'active_path': 'prediction\\models\\models\\current_model.joblib'}
+[2026-03-18 10:16:00] INFO - Pipeline summary written to: artifacts\pipeline_summary.json
+[2026-03-18 10:16:00] INFO - ======== Pipeline finished successfully ========
+[2026-03-18 10:25:40] INFO -  Laptop Price Prediction package initialized
+[2026-03-18 10:25:58] INFO - ======== Pipeline started ========
+[2026-03-18 10:25:58] INFO - Step 1: Data ingestion
+[2026-03-18 10:25:58] ERROR - Pipeline failed
+Traceback (most recent call last):
+  File "C:\Users\Lenovo\OneDrive\Desktop\projects\src\components\data_ingestion.py", line 18, in ingest_data
+    user = MYSQL['root']
+           ~~~~~^^^^^^^^
+KeyError: 'root'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Lenovo\OneDrive\Desktop\projects\src\pipeline\training_pipeline.py", line 43, in run_pipeline
+    ingestion_artifact: DataIngestionArtifact = ingest_data()
+                                                ^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\OneDrive\Desktop\projects\src\components\data_ingestion.py", line 42, in ingest_data
+    raise PricePredictorException(f"Data ingestion failed: {e}")
+src.exception.PricePredictorException: Data ingestion failed: 'root'
+[2026-03-18 10:32:01] INFO -  Laptop Price Prediction package initialized
+[2026-03-18 10:33:16] INFO -  Laptop Price Prediction package initialized
+[2026-03-18 10:33:34] INFO - ======== Pipeline started ========
+[2026-03-18 10:33:34] INFO - Step 1: Data ingestion
+[2026-03-18 10:33:34] INFO - Attempting to read from MySQL
+[2026-03-18 10:33:35] WARNING - MySQL read failed: (pymysql.err.OperationalError) (1045, "Access denied for user 'root'@'localhost' (using password: NO)")
+(Background on this error at: https://sqlalche.me/e/20/e3q8). Falling back to CSV.
+[2026-03-18 10:33:35] INFO - Raw data saved at: artifacts\raw\laptop_raw.csv
+[2026-03-18 10:33:35] INFO - Step 2: Data validation (basic checks)
+[2026-03-18 10:33:35] INFO - Missing value ratios (top 10):
+{'Secondary_Storage': 0.8116, 'SKU': 0.0, 'Model': 0.0, 'Brand': 0.0, 'CPU': 0.0, 'RAM': 0.0, 'Primary_Storage': 0.0, 'GPU': 0.0, 'Screen_Size': 0.0, 'Resolution': 0.0}
+[2026-03-18 10:33:35] WARNING - Columns with > 30% missing: {'Secondary_Storage': 0.8116}
+[2026-03-18 10:33:35] INFO - Dropped high-NA columns and continuing: ['Secondary_Storage']
+[2026-03-18 10:33:35] INFO - Data validation passed (validate() ok).
+[2026-03-18 10:33:35] INFO - Saved possibly-updated raw dataframe to artifacts\raw\laptop_raw.csv
+[2026-03-18 10:33:35] INFO - Step 3: Data transformation
+[2026-03-18 10:33:36] INFO - Dropped identifier column: SKU
+[2026-03-18 10:33:36] INFO - Dropped identifier column: Model
+[2026-03-18 10:33:36] INFO - Numeric cols: ['Screen_Size', 'Weight_kg', 'Battery_Hours']
+[2026-03-18 10:33:36] INFO - Categorical cols: ['Brand', 'CPU', 'RAM', 'Primary_Storage', 'GPU', 'Resolution', 'OS', 'Type', 'Touchscreen']
+[2026-03-18 10:33:36] INFO - Fitting preprocessor on training features...
+[2026-03-18 10:33:36] INFO - Saved preprocessor to: artifacts\transformed\preprocessor.joblib
+[2026-03-18 10:33:36] INFO - Saved artifacts/transformed/train.csv and test.csv
+[2026-03-18 10:33:36] INFO - Saved artifacts/transformed/feature_list.json
+[2026-03-18 10:33:36] INFO - Transformer saved at: artifacts\transformed\preprocessor.joblib
+[2026-03-18 10:33:36] INFO - Step 4: Model training
+[2026-03-18 10:33:36] INFO - Loading transformed train/test CSVs
+[2026-03-18 10:33:36] INFO - Loading preprocessor from: artifacts\transformed\preprocessor.joblib
+[2026-03-18 10:33:36] INFO - Transforming features using preprocessor
+[2026-03-18 10:33:36] INFO - Training LinearRegression (baseline)
+[2026-03-18 10:33:36] INFO - LinearRegression evaluation -> RMSE: 8243.5040, MAE: 5749.0160, R2: 0.9650
+[2026-03-18 10:33:36] INFO - Training RandomForestRegressor
+[2026-03-18 10:33:41] INFO - RandomForest evaluation -> RMSE: 9166.6615, MAE: 6746.8086, R2: 0.9568
+[2026-03-18 10:33:41] INFO - Selected best model: LinearRegression with RMSE = 8243.5040
+[2026-03-18 10:33:41] INFO - Saved best model to: artifacts\model\best_model.joblib
+[2026-03-18 10:33:41] INFO - ModelTrainerArtifact created -> train_score: 0.9656, test_score: 0.9650
+[2026-03-18 10:33:41] INFO - Model saved at: artifacts\model\best_model.joblib
+[2026-03-18 10:33:41] INFO - Train score (R2): 0.9656  Test score (R2): 0.9650
+[2026-03-18 10:33:41] INFO - Step 5: Model evaluation
+[2026-03-18 10:33:41] INFO - Starting model evaluation...
+[2026-03-18 10:33:41] INFO - Loaded model from artifacts\model\best_model.joblib and preprocessor from artifacts\transformed\preprocessor.joblib
+[2026-03-18 10:33:41] INFO - Model Evaluation Completed \u2192 RMSE: 8243.5040, MAE: 5749.0160, R2: 0.9650
+[2026-03-18 10:33:41] INFO - Metrics saved to artifacts\model\model_metrics.json
+[2026-03-18 10:33:41] INFO - Evaluation metrics: {'RMSE': 8243.503973813784, 'MAE': 5749.0160413520925, 'R2': 0.9650240530089602}
+[2026-03-18 10:33:41] INFO - Step 6: Model pushing
+[2026-03-18 10:33:41] INFO - Pushed model version to: prediction\models\models\best_model_20260318_103341.joblib
+[2026-03-18 10:33:41] INFO - Archived previous active model to: prediction\models\archive\current_model_20260318_103341.joblib
+[2026-03-18 10:33:41] INFO - Copied new model to active path: prediction\models\models\current_model.joblib
+[2026-03-18 10:33:41] INFO - Model push info: {'versioned_path': 'prediction\\models\\models\\best_model_20260318_103341.joblib', 'archived_previous_active': 'prediction\\models\\archive\\current_model_20260318_103341.joblib', 'active_path': 'prediction\\models\\models\\current_model.joblib'}
+[2026-03-18 10:33:41] INFO - Pipeline summary written to: artifacts\pipeline_summary.json
+[2026-03-18 10:33:41] INFO - ======== Pipeline finished successfully ========
+[2026-03-18 10:48:33] INFO -  Laptop Price Prediction package initialized
+[2026-03-18 10:48:43] INFO - ======== Pipeline started ========
+[2026-03-18 10:48:43] INFO - Step 1: Data ingestion
+[2026-03-18 10:48:43] INFO - Attempting to read from MySQL
+[2026-03-18 10:48:47] WARNING - MySQL read failed: (pymysql.err.OperationalError) (2003, "Can't connect to MySQL server on 'localhost' ([WinError 10061] No connection could be made because the target machine actively refused it)")
+(Background on this error at: https://sqlalche.me/e/20/e3q8). Falling back to CSV.
+[2026-03-18 10:48:48] INFO - Raw data saved at: artifacts\raw\laptop_raw.csv
+[2026-03-18 10:48:48] INFO - Step 2: Data validation (basic checks)
+[2026-03-18 10:48:48] INFO - Missing value ratios (top 10):
+{'Secondary_Storage': 0.8116, 'SKU': 0.0, 'Model': 0.0, 'Brand': 0.0, 'CPU': 0.0, 'RAM': 0.0, 'Primary_Storage': 0.0, 'GPU': 0.0, 'Screen_Size': 0.0, 'Resolution': 0.0}
+[2026-03-18 10:48:48] WARNING - Columns with > 30% missing: {'Secondary_Storage': 0.8116}
+[2026-03-18 10:48:48] INFO - Dropped high-NA columns and continuing: ['Secondary_Storage']
+[2026-03-18 10:48:48] INFO - Data validation passed (validate() ok).
+[2026-03-18 10:48:48] INFO - Saved possibly-updated raw dataframe to artifacts\raw\laptop_raw.csv
+[2026-03-18 10:48:48] INFO - Step 3: Data transformation
+[2026-03-18 10:48:48] INFO - Dropped identifier column: SKU
+[2026-03-18 10:48:48] INFO - Dropped identifier column: Model
+[2026-03-18 10:48:48] INFO - Numeric cols: ['Screen_Size', 'Weight_kg', 'Battery_Hours']
+[2026-03-18 10:48:48] INFO - Categorical cols: ['Brand', 'CPU', 'RAM', 'Primary_Storage', 'GPU', 'Resolution', 'OS', 'Type', 'Touchscreen']
+[2026-03-18 10:48:48] INFO - Fitting preprocessor on training features...
+[2026-03-18 10:48:48] INFO - Saved preprocessor to: artifacts\transformed\preprocessor.joblib
+[2026-03-18 10:48:48] INFO - Saved artifacts/transformed/train.csv and test.csv
+[2026-03-18 10:48:48] INFO - Saved artifacts/transformed/feature_list.json
+[2026-03-18 10:48:48] INFO - Transformer saved at: artifacts\transformed\preprocessor.joblib
+[2026-03-18 10:48:48] INFO - Step 4: Model training
+[2026-03-18 10:48:48] INFO - Loading transformed train/test CSVs
+[2026-03-18 10:48:48] INFO - Loading preprocessor from: artifacts\transformed\preprocessor.joblib
+[2026-03-18 10:48:48] INFO - Transforming features using preprocessor
+[2026-03-18 10:48:48] INFO - Training LinearRegression (baseline)
+[2026-03-18 10:48:48] INFO - LinearRegression evaluation -> RMSE: 8243.5040, MAE: 5749.0160, R2: 0.9650
+[2026-03-18 10:48:48] INFO - Training RandomForestRegressor
+[2026-03-18 10:48:50] INFO - RandomForest evaluation -> RMSE: 9166.6615, MAE: 6746.8086, R2: 0.9568
+[2026-03-18 10:48:50] INFO - Selected best model: LinearRegression with RMSE = 8243.5040
+[2026-03-18 10:48:50] INFO - Saved best model to: artifacts\model\best_model.joblib
+[2026-03-18 10:48:50] INFO - ModelTrainerArtifact created -> train_score: 0.9656, test_score: 0.9650
+[2026-03-18 10:48:50] INFO - Model saved at: artifacts\model\best_model.joblib
+[2026-03-18 10:48:50] INFO - Train score (R2): 0.9656  Test score (R2): 0.9650
+[2026-03-18 10:48:50] INFO - Step 5: Model evaluation
+[2026-03-18 10:48:50] INFO - Starting model evaluation...
+[2026-03-18 10:48:50] INFO - Loaded model from artifacts\model\best_model.joblib and preprocessor from artifacts\transformed\preprocessor.joblib
+[2026-03-18 10:48:50] INFO - Model Evaluation Completed \u2192 RMSE: 8243.5040, MAE: 5749.0160, R2: 0.9650
+[2026-03-18 10:48:50] INFO - Metrics saved to artifacts\model\model_metrics.json
+[2026-03-18 10:48:50] INFO - Evaluation metrics: {'RMSE': 8243.503973813784, 'MAE': 5749.0160413520925, 'R2': 0.9650240530089602}
+[2026-03-18 10:48:50] INFO - Step 6: Model pushing
+[2026-03-18 10:48:50] INFO - Pushed model version to: prediction\models\models\best_model_20260318_104850.joblib
+[2026-03-18 10:48:50] INFO - Archived previous active model to: prediction\models\archive\current_model_20260318_104850.joblib
+[2026-03-18 10:48:50] INFO - Copied new model to active path: prediction\models\models\current_model.joblib
+[2026-03-18 10:48:50] INFO - Model push info: {'versioned_path': 'prediction\\models\\models\\best_model_20260318_104850.joblib', 'archived_previous_active': 'prediction\\models\\archive\\current_model_20260318_104850.joblib', 'active_path': 'prediction\\models\\models\\current_model.joblib'}
+[2026-03-18 10:48:50] INFO - Pipeline summary written to: artifacts\pipeline_summary.json
+[2026-03-18 10:48:50] INFO - ======== Pipeline finished successfully ========
+[2026-03-18 11:02:51] INFO -  Laptop Price Prediction package initialized
+[2026-03-18 11:02:59] INFO - ======== Pipeline started ========
+[2026-03-18 11:02:59] INFO - Step 1: Data ingestion
+[2026-03-18 11:02:59] INFO - Attempting to read from MySQL
+[2026-03-18 11:03:03] WARNING - MySQL read failed: (pymysql.err.OperationalError) (2003, "Can't connect to MySQL server on 'localhost' ([WinError 10061] No connection could be made because the target machine actively refused it)")
+(Background on this error at: https://sqlalche.me/e/20/e3q8). Falling back to CSV.
+[2026-03-18 11:03:03] INFO - Raw data saved at: artifacts\raw\laptop_raw.csv
+[2026-03-18 11:03:03] INFO - Step 2: Data validation (basic checks)
+[2026-03-18 11:03:03] INFO - Missing value ratios (top 10):
+{'Secondary_Storage': 0.8116, 'SKU': 0.0, 'Model': 0.0, 'Brand': 0.0, 'CPU': 0.0, 'RAM': 0.0, 'Primary_Storage': 0.0, 'GPU': 0.0, 'Screen_Size': 0.0, 'Resolution': 0.0}
+[2026-03-18 11:03:03] WARNING - Columns with > 30% missing: {'Secondary_Storage': 0.8116}
+[2026-03-18 11:03:03] INFO - Dropped high-NA columns and continuing: ['Secondary_Storage']
+[2026-03-18 11:03:03] INFO - Data validation passed (validate() ok).
+[2026-03-18 11:03:03] INFO - Saved possibly-updated raw dataframe to artifacts\raw\laptop_raw.csv
+[2026-03-18 11:03:03] INFO - Step 3: Data transformation
+[2026-03-18 11:03:03] INFO - Dropped identifier column: SKU
+[2026-03-18 11:03:03] INFO - Dropped identifier column: Model
+[2026-03-18 11:03:03] INFO - Numeric cols: ['Screen_Size', 'Weight_kg', 'Battery_Hours']
+[2026-03-18 11:03:03] INFO - Categorical cols: ['Brand', 'CPU', 'RAM', 'Primary_Storage', 'GPU', 'Resolution', 'OS', 'Type', 'Touchscreen']
+[2026-03-18 11:03:03] INFO - Fitting preprocessor on training features...
+[2026-03-18 11:03:03] INFO - Saved preprocessor to: artifacts\transformed\preprocessor.joblib
+[2026-03-18 11:03:03] INFO - Saved artifacts/transformed/train.csv and test.csv
+[2026-03-18 11:03:03] INFO - Saved artifacts/transformed/feature_list.json
+[2026-03-18 11:03:03] INFO - Transformer saved at: artifacts\transformed\preprocessor.joblib
+[2026-03-18 11:03:03] INFO - Step 4: Model training
+[2026-03-18 11:03:03] INFO - Loading transformed train/test CSVs
+[2026-03-18 11:03:04] INFO - Loading preprocessor from: artifacts\transformed\preprocessor.joblib
+[2026-03-18 11:03:04] INFO - Transforming features using preprocessor
+[2026-03-18 11:03:04] INFO - Training LinearRegression (baseline)
+[2026-03-18 11:03:04] INFO - LinearRegression evaluation -> RMSE: 8243.5040, MAE: 5749.0160, R2: 0.9650
+[2026-03-18 11:03:04] INFO - Training RandomForestRegressor
+[2026-03-18 11:03:05] INFO - RandomForest evaluation -> RMSE: 9166.6615, MAE: 6746.8086, R2: 0.9568
+[2026-03-18 11:03:05] INFO - Selected best model: LinearRegression with RMSE = 8243.5040
+[2026-03-18 11:03:05] INFO - Saved best model to: artifacts\model\best_model.joblib
+[2026-03-18 11:03:05] INFO - ModelTrainerArtifact created -> train_score: 0.9656, test_score: 0.9650
+[2026-03-18 11:03:06] INFO - Model saved at: artifacts\model\best_model.joblib
+[2026-03-18 11:03:06] INFO - Train score (R2): 0.9656  Test score (R2): 0.9650
+[2026-03-18 11:03:06] INFO - Step 5: Model evaluation
+[2026-03-18 11:03:06] INFO - Starting model evaluation...
+[2026-03-18 11:03:06] INFO - Loaded model from artifacts\model\best_model.joblib and preprocessor from artifacts\transformed\preprocessor.joblib
+[2026-03-18 11:03:06] INFO - Model Evaluation Completed \u2192 RMSE: 8243.5040, MAE: 5749.0160, R2: 0.9650
+[2026-03-18 11:03:06] INFO - Metrics saved to artifacts\model\model_metrics.json
+[2026-03-18 11:03:06] INFO - Evaluation metrics: {'RMSE': 8243.503973813784, 'MAE': 5749.0160413520925, 'R2': 0.9650240530089602}
+[2026-03-18 11:03:06] INFO - Step 6: Model pushing
+[2026-03-18 11:03:06] INFO - Pushed model version to: prediction\models\models\best_model_20260318_110306.joblib
+[2026-03-18 11:03:06] INFO - Archived previous active model to: prediction\models\archive\current_model_20260318_110306.joblib
+[2026-03-18 11:03:06] INFO - Copied new model to active path: prediction\models\models\current_model.joblib
+[2026-03-18 11:03:06] INFO - Model push info: {'versioned_path': 'prediction\\models\\models\\best_model_20260318_110306.joblib', 'archived_previous_active': 'prediction\\models\\archive\\current_model_20260318_110306.joblib', 'active_path': 'prediction\\models\\models\\current_model.joblib'}
+[2026-03-18 11:03:06] INFO - Pipeline summary written to: artifacts\pipeline_summary.json
+[2026-03-18 11:03:06] INFO - ======== Pipeline finished successfully ========
