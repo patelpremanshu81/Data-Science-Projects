@@ -1,3 +1,32 @@
 venv
 
 .env
+#python
+__pycache__/
+*.pyc
+*>pyd
+*.pyo
+*egg.info/
+
+
+#IDE
+.vscode/
+.idea/
+
+#logs and output
+logs/
+*.logs
+notebooks/.ipynb.checkpoints/
+notebooks/EDA_laptop_price.ipynb
+notebooks/Feature_Engineering.ipynb
+
+env/
+__pycache__/
+*.ipynb
+logs/
+artifacts/raw/
+artifacts/unseen_test/
+prediction/models/archive
+
+
+notebook
