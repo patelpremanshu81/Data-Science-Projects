@@ -1,24 +1,39 @@
 venv
 
 .env
-#python
+
+# Python
 __pycache__/
 *.pyc
-*>pyd
 *.pyo
-*egg.info/
+*.pyd
+*.egg-info/
+mlenv/
 
-
-#IDE
+# IDE
 .vscode/
 .idea/
 
-#logs and output
+# Logs and outputs
 logs/
-*.logs
-notebooks/.ipynb.checkpoints/
-notebooks/EDA_laptop_price.ipynb
-notebooks/Feature_Engineering.ipynb
+*.log
+notebooks/.ipynb_checkpoints/
+notebook/EDA_Laptop_Price.ipynb
+notebook/Feature_Engineering.ipynb
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# Environment files
+.env
+venv
+
+
+# Jupyter
+.ipynb_checkpoints/
+
+
 
 env/
 __pycache__/
@@ -26,7 +41,7 @@ __pycache__/
 logs/
 artifacts/raw/
 artifacts/unseen_test/
-prediction/models/archive
+prediction/models/archive/
 
 
 notebook
